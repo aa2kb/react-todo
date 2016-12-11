@@ -1,28 +1,27 @@
 var React = require('react');
-var Todo = require('todo');
-var TodoList = React.createClass({
-  addTodo(e){
-    e.preventDefault();
-    var todoText = this.refs.text.value;
-    if(todoText.length > 0){
-      this.refs.text.value = "";
-      this.props.onaddTodo(todoText);
-    }
-    else{
-      this.refs.text.focus();
-    }
 
+var AddTodo = React.createClass({
+  handleSubmit: function (e) {
+    e.preventDefault();
+    var todoText = this.refs.todoText.value;
+
+    if (todoText.length > 0) {
+      this.refs.todoText.value = '';
+      this.props.onAddTodo(todoText);
+    } else {
+      this.refs.todoText.focus();
+    }
   },
-  render(){
+  render: function () {
     return (
-      <div>
-        <form ref="form" onSubmit={this.addTodo}>
-          <input type="text" placeholder="What do you need to do ?" ref="text"/>
+      <div className="container__footer">
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" ref="todoText" placeholder="What do you need to do?"/>
           <button className="button expanded">Add Todo</button>
         </form>
       </div>
-    )
+    );
   }
 });
 
-module.exports = TodoList;
+module.exports = AddTodo;
